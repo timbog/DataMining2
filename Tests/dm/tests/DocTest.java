@@ -16,7 +16,7 @@ public class DocTest {
     @org.junit.Before
     public void setUp() throws Exception {
 
-        }
+    }
         /*doc = new Doc ("http://lenta.ru/news/2014/10/13/cheese/", themes);
         doc.setContent("Путин приехал в США на самолете Обамы.");
         doc2 = new Doc ("http://lenta.ru/news/2014/10/13/cheese/", themes);
@@ -32,51 +32,131 @@ public class DocTest {
 
     @org.junit.Test
     public void testCountAssignments() throws Exception {
-            BaseData data = new BaseData();
-            for (Theme theme : data.getThemes()) {
-                System.out.print(theme.getName() + ":  ");
-                for (Word word : theme.getWords()) {
-                    System.out.print(word.getValue() + "  ");
-                }
-                System.out.println();
+        BaseData data = new BaseData();
+        for (Theme theme : data.getThemes()) {
+            WordSorter sorter = new WordSorter();
+            sorter.sort(theme.getWords());
+            System.out.print(theme.getName() + ":  ");
+            for (Word word : theme.getWords()) {
+                System.out.print(word.getValue() + "__");
+                System.out.print(word.getProbability() + "    ");
             }
-
-
+            System.out.println();
+        }
     }
 
     @org.junit.Test
     public void testChangeWordThemes() throws Exception {
-        List<Theme> themes= new ArrayList<Theme>();
+        List<Theme> themes = new ArrayList<Theme>();
         for (int i = 0; i < 4; i++) {
             Theme theme = new Theme("t" + (i + 1));
             themes.add(theme);
         }
-        doc = new Doc ("http://lenta.ru/news/2014/10/13/cheese/", themes);
+        doc = new Doc("http://lenta.ru/news/2014/10/13/cheese/", themes);
         doc.setContent("Путин приехал в США на самолете Обамы.");
         doc.init();
-        for (Theme theme: themes) {
+        for (Theme theme : themes) {
             theme.countWordAmount();
             System.out.print(theme.getName() + ":  ");
-            for (Word word: theme.getWords()) {
+            for (Word word : theme.getWords()) {
                 System.out.print(word.getValue());
                 System.out.println(theme.getWordAmount().get(word.getValue()));
             }
             System.out.println();
         }
-        System.out.println( "  ||| ");
+        System.out.println("  ||| ");
         doc.changeWordThemes();
-        for (Theme theme: themes) {
+        for (Theme theme : themes) {
             System.out.print(theme.getName() + ":  ");
-            for (Word word: theme.getWords()) {
+            for (Word word : theme.getWords()) {
                 System.out.print(word.getValue());
                 System.out.println(theme.getWordAmount().get(word.getValue()));
             }
         }
         System.out.println();
-        for (Word word: doc.getWords()) {
+        for (Word word : doc.getWords()) {
             System.out.print(word.getValue() + ":  ");
             System.out.println(Constants.getLyambda().get(word.getValue()));
         }
     }
 
-}
+    @org.junit.Test
+    public void testThemeAppearance() throws Exception {
+        List<Theme> themes = new ArrayList<Theme>();
+        for (int i = 0; i < 4; i++) {
+            Theme theme = new Theme("t" + (i + 1));
+            themes.add(theme);
+        }
+        doc = new Doc("http://lenta.ru/news/2014/10/13/cheese/", themes);
+        doc.setContent("Путин приехал в США на самолете Обамы.");
+        doc.init();
+        for (Theme theme : themes) {
+            theme.countWordAmount();
+            System.out.print(theme.getName() + ":  ");
+            for (Word word : theme.getWords()) {
+                System.out.print(word.getValue());
+                System.out.println(theme.getWordAmount().get(word.getValue()));
+            }
+            System.out.println();
+        }
+        doc.countThemeAppearance();
+        for (int i = 0; i < themes.size(); i++) {
+            System.out.print(doc.getThemeAppearance().get(themes.get(i).getName()));
+        }
+
+    }
+
+    @org.junit.Test
+    public void testAssignments()
+    throws Exception
+
+    {
+        List<Theme> themes = new ArrayList<Theme>();
+        for (int i = 0; i < 4; i++) {
+            Theme theme = new Theme("t" + (i + 1));
+            themes.add(theme);
+        }
+        doc = new Doc("http://lenta.ru/news/2014/10/13/cheese/", themes);
+        doc.setContent("Путин приехал в США на самолете Обамы.");
+        doc.init();
+        for (Theme theme : themes) {
+            theme.countWordAmount();
+            System.out.print(theme.getName() + ":  ");
+            for (Word word : theme.getWords()) {
+                System.out.print(word.getValue());
+                System.out.println(theme.getWordAmount().get(word.getValue()));
+            }
+            System.out.println();
+        }
+
+        for (Word word : doc.getWords()) {
+            System.out.print(word.getValue() + ": ");
+            for (int i = 0; i < doc.getAssignments().get(doc.getWords().indexOf(word)).size(); i++) {
+                System.out.print(doc.getAssignments().get(doc.getWords().indexOf(word)).get(i) + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
+
+    @org.junit.Test
+    public void changeThemeTest()
+            throws Exception
+    {
+        List<Theme> themes = new ArrayList<Theme>();
+        for (int i = 0; i < 4; i++) {
+            Theme theme = new Theme("t" + (i + 1));
+            themes.add(theme);
+        }
+        doc = new Doc("http://lenta.ru/news/2014/10/13/cheese/", themes);
+        doc.setContent("Путин приехал в США на самолете Обамы.");
+        doc.init();
+        for (int i = 0; i < 4; i++) {
+            themes.get(i).countWordAmount();
+        }
+        doc.changeWordThemes();
+        }
+
+    }
+

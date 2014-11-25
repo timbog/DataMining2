@@ -14,8 +14,19 @@ import java.awt.Desktop;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        ThemeSolver solver = new ThemeSolver(new BaseData(), "http://lenta.ru/news/2014/10/18/gonzalo/");
-        System.out.println("exit");
+        //ThemeSolver solver = new ThemeSolver(new BaseData(), "http://lenta.ru/news/2014/10/18/gonzalo/");
+        //System.out.println("exit");
+        BaseData data = new BaseData();
+        for (Theme theme : data.getThemes()) {
+            WordSorter sorter = new WordSorter();
+            sorter.sort(theme.getWords());
+            System.out.print(theme.getName() + ":  ");
+            for (Word word : theme.getWords()) {
+                System.out.print(word.getValue() + "__");
+                System.out.print(word.getProbability() + "    ");
+            }
+            System.out.println();
+        }
     }
 
 }

@@ -22,13 +22,13 @@ public class BaseData {
         makeLinks();
         makeThemes();
         makeDocuments();
-        for (int i = 0; i < 5; i ++) {
+        for (int i = 0; i < 20; i ++) {
             changeThemes();
         }
     }
 
     private void makeThemes() {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 8; i++) {
             Theme theme = new Theme("t" + (i + 1));
             themes.add(theme);
         }
@@ -63,7 +63,7 @@ public class BaseData {
         links.add("http://lenta.ru/news/2014/11/04/facebookmurder/");
         links.add("http://lenta.ru/news/2014/11/05/submarine/");
         links.add("http://lenta.ru/news/2014/11/05/euro/");
-        /*links.add("http://lenta.ru/news/2014/11/05/albania/");
+        links.add("http://lenta.ru/news/2014/11/05/albania/");
         links.add("http://lenta.ru/news/2014/11/05/string/");
         links.add("http://lenta.ru/news/2014/11/05/nalchik/");
         links.add("http://lenta.ru/news/2014/11/04/brandao/");
@@ -75,7 +75,7 @@ public class BaseData {
         links.add("http://lenta.ru/news/2014/10/31/itch//");
         links.add("http://lenta.ru/news/2014/11/05/putin1/");
         links.add("http://lenta.ru/news/2014/11/03/captainsdaughter/");
-        links.add("http://lenta.ru/news/2014/11/04/jobs/");*/
+        links.add("http://lenta.ru/news/2014/11/04/jobs/");
     }
 
 

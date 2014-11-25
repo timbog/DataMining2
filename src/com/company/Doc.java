@@ -17,7 +17,21 @@ public class Doc {
     private String content;
     private List<Theme> themes;
     private List<Word> words = new ArrayList<Word>();
+
+    public List<ArrayList<Integer>> getAssignments() {
+        return assignments;
+    }
+
     private List<ArrayList<Integer>> assignments= new ArrayList<ArrayList<Integer>>();
+
+    public HashMap<String, Integer> getThemeAppearance() {
+        return themeAppearance;
+    }
+
+    public void setThemeAppearance(HashMap<String, Integer> themeAppearance) {
+        this.themeAppearance = themeAppearance;
+    }
+
     private HashMap<String, Integer> themeAppearance;
 
     public String getContent() {
@@ -126,7 +140,8 @@ public class Doc {
         countAssignments();
     }
 
-    private void countThemeAppearance() {
+    public void countThemeAppearance() {
+        themeAppearance.clear();
         int[] array = new int[themes.size()];
         for (int i = 0; i < themes.size(); i++) {
             array[i] = 0;
@@ -148,7 +163,9 @@ public class Doc {
         if (amountOfThisWord - 1 != 0) {
             word.getTheme().getWordAmount().put(word.getValue(), amountOfThisWord - 1);
         }
-
+        int oldThemeAppearance = themeAppearance.get(word.getTheme().getName());
+        themeAppearance.remove(word.getTheme().getName());
+        themeAppearance.put(word.getTheme().getName(), oldThemeAppearance - 1);
         assignments.get(words.indexOf(word)).set(themes.indexOf(word.getTheme()), assignments.get(words.indexOf(word)).get(themes.indexOf(word.getTheme())) - 1);
         HashMap<String, Double> probabilities = new HashMap<String, Double>();
         Random random = new Random();
@@ -177,11 +194,11 @@ public class Doc {
                 indexOfNewTheme = i;
                 break;
             }
-        }
-        /*double res = 0;
+        }/*
+        double res = 0;
         for (int i = 0; i < themes.size(); i++) {
-            if (probabilities.get(i) > res) {
-                res = probabilities.get(i);
+            if (probabilities.get(themes.get(i).getName()) > res) {
+                res = probabilities.get(themes.get(i).getName());
                 indexOfNewTheme = i;
             }
         }*/
@@ -193,7 +210,6 @@ public class Doc {
         themes.get(indexOfNewTheme).getWordAmount().put(word.getValue(), temp2 + 1);
 
         word.setTheme(themes.get(indexOfNewTheme));
-
         word.setProbability(probabilities.get(themes.get(indexOfNewTheme).getName()));
         assignments.get(words.indexOf(word)).set(themes.indexOf(word.getTheme()), assignments.get(words.indexOf(word)).get(themes.indexOf(word.getTheme())) + 1);
     }

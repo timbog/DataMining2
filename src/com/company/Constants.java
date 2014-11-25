@@ -28,7 +28,7 @@ public class Constants {
 
     private static double generateRandom() {
         double min=0.1;
-        double max=100;
+        double max=10;
         Random r = new Random();
         double randomValue = min + (max - min) * r.nextDouble();
         while (Double.valueOf(randomValue).isInfinite()) {
