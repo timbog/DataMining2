@@ -38,12 +38,11 @@ public class Constants {
     }
 
     public static void addThemeName(String themeName) {
-
-        alfa.put(themeName, generateRandom());
+        alfa.put(themeName, 5.0);
     }
 
     public static void addWordValue(String wordValue) {
-        lyambda.put(wordValue, generateRandom());
+        lyambda.put(wordValue, 10.0);
     }
 
 }

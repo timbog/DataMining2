@@ -75,7 +75,6 @@ public class Doc {
         try {
             Document doc = Jsoup.connect(path).get();
             Element content = doc.getElementsByClass("b-topic__body").first();
-            System.out.println();
             String str = content.toString();
             String temp = "";
             boolean flag = true;
@@ -138,6 +137,7 @@ public class Doc {
             }
         }
         countAssignments();
+        countThemeAppearance();
     }
 
     public void countThemeAppearance() {
@@ -156,7 +156,7 @@ public class Doc {
 
     private void changeThemeOfWord(Word word) {
         //countAssignments();
-        countThemeAppearance();
+        //countThemeAppearance();
         word.getTheme().getWords().remove(word);
         int amountOfThisWord = word.getTheme().getWordAmount().get(word.getValue());
         word.getTheme().getWordAmount().remove(word.getValue());
@@ -209,9 +209,14 @@ public class Doc {
         }
         themes.get(indexOfNewTheme).getWordAmount().put(word.getValue(), temp2 + 1);
 
+        int newThemeAppearance = themeAppearance.get(themes.get(indexOfNewTheme).getName());
+        themeAppearance.remove(themes.get(indexOfNewTheme).getName());
+        themeAppearance.put(themes.get(indexOfNewTheme).getName(), newThemeAppearance + 1);
+
         word.setTheme(themes.get(indexOfNewTheme));
         word.setProbability(probabilities.get(themes.get(indexOfNewTheme).getName()));
         assignments.get(words.indexOf(word)).set(themes.indexOf(word.getTheme()), assignments.get(words.indexOf(word)).get(themes.indexOf(word.getTheme())) + 1);
+        int a = 5;
     }
 
     public void countAssignments() {

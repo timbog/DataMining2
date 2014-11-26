@@ -22,7 +22,8 @@ public class BaseData {
         makeLinks();
         makeThemes();
         makeDocuments();
-        for (int i = 0; i < 20; i ++) {
+
+        for (int i = 0; i < 80; i ++) {
             changeThemes();
         }
     }
@@ -56,6 +57,7 @@ public class BaseData {
     }
 
     private void makeLinks() {
+        links.add("http://lenta.ru/news/2014/11/04/jobs/");
         links.add("http://lenta.ru/news/2014/10/13/cheese/");
         links.add("http://lenta.ru/news/2014/07/31/juice/");
         links.add("http://lenta.ru/news/2014/11/03/last/");
@@ -75,7 +77,6 @@ public class BaseData {
         links.add("http://lenta.ru/news/2014/10/31/itch//");
         links.add("http://lenta.ru/news/2014/11/05/putin1/");
         links.add("http://lenta.ru/news/2014/11/03/captainsdaughter/");
-        links.add("http://lenta.ru/news/2014/11/04/jobs/");
     }
 
 

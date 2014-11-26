@@ -17,9 +17,10 @@ public class Main {
         //ThemeSolver solver = new ThemeSolver(new BaseData(), "http://lenta.ru/news/2014/10/18/gonzalo/");
         //System.out.println("exit");
         BaseData data = new BaseData();
+        System.out.println();
         for (Theme theme : data.getThemes()) {
             WordSorter sorter = new WordSorter();
-            sorter.sort(theme.getWords());
+            theme.setwords(sorter.sort(theme.getWords()));
             System.out.print(theme.getName() + ":  ");
             for (Word word : theme.getWords()) {
                 System.out.print(word.getValue() + "__");
